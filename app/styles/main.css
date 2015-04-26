@@ -292,7 +292,7 @@ a.play-spotify {
 #playlistDrawer {
   overflow-y: auto;
   z-index: 1000;
-  top: 51px;
+  top: 56px;
   right: 0;
   width: 400px;
   position: fixed;
@@ -405,6 +405,21 @@ a.playlist-spotify:hover {
 }
 
 /* Responsive: Portrait tablets and up */
+@media screen and (max-width: 510px) {
+  .relatify-container .form-control#artistName {
+    width: 250px;
+  }
+}
+@media screen and (max-width: 398px) {
+  .relatify-container .form-control#artistName {
+    width: 200px;
+  }
+}
+@media screen and (max-width: 350px) {
+  .relatify-container .form-control#artistName {
+    width: 150px;
+  }
+}
 @media screen and (min-width: 768px) {
   /* Remove the padding we set earlier */
   .header,
@@ -420,5 +435,14 @@ a.playlist-spotify:hover {
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
     border-bottom: 0;
+  }
+
+  #playlistDrawer {
+    top: 51px;
+  }
+}
+@media screen and (max-width: 400px) {
+  #playlistDrawer {
+    width: 100%;
   }
 }
