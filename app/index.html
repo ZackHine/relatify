@@ -106,7 +106,7 @@
   </div>
 
   <div ng-cloak ng-if="ac.model.relatedArtists && ac.model.relatedArtists.length > 0">
-    <slick  infinite=true slides-to-show=3 slides-to-scroll=3 responsive="ac.breakpoints">
+    <slick  infinite=true slides-to-show=3 slides-to-scroll=3>
       <div ng-repeat="artist in ac.model.relatedArtists">
         <div class="image">
           <img ng-src="{{artist.images[0].url}}"/>
