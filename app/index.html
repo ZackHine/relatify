@@ -1,0 +1,184 @@
+<!doctype html>
+<html class="no-js" style="height: 100%;">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css" />
+  <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick-theme.css" />
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild -->
+</head>
+<body ng-app="relatifyApp" style="height: 100%;">
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!-- Add your site or application content here -->
+<div class="header" ng-controller="MainCtrl as mc">
+  <div class="navbar navbar-default relatify-navbar" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <span class="navbar-brand relatify-navbar-brand" href="#/">relatify</span>
+      </div>
+
+      <div>
+        <ul class="nav navbar-nav navbar-right relatify-navbar-right">
+          <li ng-cloak ng-show="mc.model.loggedInUser === null" class="login-button-list-item">
+            <button class="spotify-login-button button-add navbar-right" ng-click="mc.login()">
+              <div class="b-add-text">Log in with Spotify</div>
+            </button>
+          </li>
+          <li ng-cloak ng-show="mc.model.loggedInUser !== null || mc.songsAreSelected()" ng-class="{'active': mc.drawerOpen}" ng-click="mc.openCloseDrawer()"><a>Playlists</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- TODO: Would like to get this drawer out of being nested within MainCtrl and relying on it at all. Need showDrawer function to be something that can be called from a Service -->
+  <div ng-cloak ng-show="mc.showDrawer()" id="playlistDrawer" ng-controller="DrawerCtrl as dc">
+    <md-content class="md-padding">
+      <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="new playlist">
+          <md-content ng-controller="PlaylistCtrl as pc">
+            <form role="form" ng-show="pc.songAdded()">
+              <div class="form-group">
+                <input type="text" class="form-control relatify-text-input" id="newPlaylistName" placeholder="Playlist Name" ng-model="pc.model.newPlaylistName">
+                <button ng-show="pc.isUserLoggedIn()" class="spotify-login-button button-add" ng-click="pc.createPlaylist(pc.model.newPlaylistName)">
+                  <div class="b-add-text">Create</div>
+                </button>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table possible-songs">
+                  <thead>
+                  <tr>
+                    <th>#</th>
+                    <th></th>
+                    <th></th>
+                    <th>SONG</th>
+                    <th>ARTIST</th>
+                    <th>SPOTIFY</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr ng-repeat="song in pc.model.possibleSongs | filter:pc.isSongSelected() | orderBy: 'orderSelected'">
+                    <td>{{$index + 1}}</td>
+                    <td><span class="glyphicon glyphicon-play" ng-class="{'glyphicon-stop': song.currentlyPlaying === true, 'glyphicon-play': song.currentlyPlaying !== true}" ng-click="pc.previewSong(song)"></span></td>
+                    <td><span class="glyphicon glyphicon-minus" ng-click="pc.unSelectSong(song)"></span></td>
+                    <td>{{song.name}}</td>
+                    <td>{{song.artists[0].name}}</td>
+                    <td><a class="play-spotify" target="_blank" ng-href="{{song.external_urls.spotify}}">Play</a></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </form>
+          </md-content>
+        </md-tab>
+        <md-tab label="my playlists" ng-show="dc.isUserLoggedIn()">
+          <md-content ng-controller="SpotifyPlaylistCtrl as spc">
+            <ul id="spotifyPlaylistList">
+              <li ng-repeat="playlist in spc.model.playlists"><img ng-src="{{playlist.images[0].url}}"/><a class="playlist-spotify" target="_blank" ng-href="{{playlist.external_urls.spotify}}">{{playlist.name}}</a></li>
+            </ul>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </md-content>
+  </div>
+</div>
+
+<div class="container relatify-container" ng-controller="ArtistCtrl as ac">
+  <div class="form-group" id="artistSearchBar">
+    <input type="text" class="form-control relatify-text-input" id="artistName" placeholder="Artist Name" ng-model="ac.model.artistName">
+    <button class="spotify-button button-add" ng-click="ac.searchArtist(ac.model.artistName)">
+      <div class="b-add-text">Search</div>
+    </button>
+  </div>
+
+  <div ng-cloak ng-if="ac.model.relatedArtists && ac.model.relatedArtists.length > 0">
+    <slick  infinite=true slides-to-show=3 slides-to-scroll=3 responsive="ac.breakpoints">
+      <div ng-repeat="artist in ac.model.relatedArtists">
+        <div class="image">
+          <img ng-src="{{artist.images[0].url}}"/>
+          <div class="artist-selection">
+            <p>{{artist.name}}</p>
+            <input type="checkbox" ng-model="ac.model.selectedArtists[artist.id]" ng-change="ac.clickedArtistCheckbox(artist)" />
+          </div>
+        </div>
+      </div>
+    </slick>
+
+    <div id="artistOptionBar">
+      <button class="spotify-button button-add" ng-click="ac.selectAllArtists()">
+        <div class="b-add-text">Select All</div>
+      </button>
+      <button class="spotify-button button-add" ng-click="ac.clearAllArtists()">
+        <div class="b-add-text">Clear</div>
+      </button>
+    </div>
+  </div>
+
+  <div ng-controller="SongsCtrl as sc">
+    <div ng-cloak ng-if="sc.showSongs()" id="possibleSongsGroup">
+      <div class="table-responsive">
+        <table class="table possible-songs">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th></th>
+            <th></th>
+            <th>SONG</th>
+            <th>ARTIST</th>
+            <th>SPOTIFY</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="song in sc.model.songs">
+            <td>{{$index + 1}}</td>
+            <td><span class="glyphicon glyphicon-play" ng-class="{'glyphicon-stop': song.currentlyPlaying === true, 'glyphicon-play': song.currentlyPlaying !== true}" ng-click="sc.previewSong(song)"></span></td>
+            <td><span class="glyphicon glyphicon-plus" ng-class="{'green-plus' : sc.songInPlaylist(song)}" ng-click="sc.selectSong(song)"></span></td>
+            <td>{{song.name}}</td>
+            <td>{{song.artists[0].name}}</td>
+            <td><a class="play-spotify" target="_blank" ng-href="{{song.external_urls.spotify}}">Play</a></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div class="footer">
+  <div class="container">
+    <p><span class="glyphicon glyphicon-heart"></span> from Zack Hine</p>
+  </div>
+</div>
+
+
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+<script>
+  !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+    (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+    r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+  }(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-XXXXX-X');
+  ga('send', 'pageview');
+</script>
+
+<script src="bower_components/requirejs/require.js" data-main="scripts/main.js"></script>
+</body>
+</html>
