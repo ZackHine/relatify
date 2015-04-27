@@ -1,4 +1,4 @@
-# relatify [![Build Status](https://travis-ci.org/ZackHine/relatify.svg?branch=master)]
+# relatify ![Build Status](https://travis-ci.org/ZackHine/relatify.svg?branch=master)
 
 > Demo AngularJS app using Spotify Web API for creating playlists of related artists.
 
