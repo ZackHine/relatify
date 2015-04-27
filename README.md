@@ -44,3 +44,14 @@ grunt build
 ```
 
 Note, `npm install` may need to be run before `grunt build`. For more details on the build/run process please see [yo angular-require generator](https://github.com/aaronallport/generator-angular-require) as this project was generated using this generator.
+
+### Connecting to Spotify
+To actually login with your Spotify account via relatify, you must edit the config block in app/scripts/app.js to include your own Spotify Developer Client ID.
+
+```javascript
+.config(function (SpotifyProvider) {
+      SpotifyProvider.setClientId('YOUR-CLIENT-ID');
+      SpotifyProvider.setRedirectUri('http://localhost:9000/callback.html');
+      SpotifyProvider.setScope('user-read-private playlist-read-private playlist-modify-private playlist-modify-public');
+    })
+```
