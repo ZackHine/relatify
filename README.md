@@ -7,6 +7,8 @@ version 0.4.2.
 
 This project uses the [Spotify Web API](https://developer.spotify.com/web-api/) and is NOT affiliated with or in any way associated with Spotify.
 
+![ScreenShot](app/images/readme_img.png)
+
 ## How to Run
 
 ### Prerequisites
