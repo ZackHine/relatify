@@ -12,6 +12,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       {pattern: 'bower_components/angular/angular.js', included: false },
+      {pattern: 'bower_components/jquery/dist/jquery.js', included: false },
       {pattern: 'bower_components/angular-mocks/angular-mocks.js', included: false },
       {pattern: 'bower_components/angular-animate/angular-animate.js', included: false },
       {pattern: 'bower_components/angular-cookies/angular-cookies.js', included: false },
@@ -19,6 +20,11 @@ module.exports = function(config) {
       {pattern: 'bower_components/angular-route/angular-route.js', included: false },
       {pattern: 'bower_components/angular-sanitize/angular-sanitize.js', included: false },
       {pattern: 'bower_components/angular-touch/angular-touch.js', included: false },
+      {pattern: 'bower_components/angular-spotify/src/angular-spotify.js', included: false },
+      {pattern: 'bower_components/slick-carousel/slick/slick.js', included: false },
+      {pattern: 'bower_components/angular-slick/dist/slick.js', included: false },
+      {pattern: 'bower_components/angular-aria/angular-aria.js', included: false },
+      {pattern: 'bower_components/angular-material/angular-material.js', included: false },
       {pattern: 'app/scripts/*.js', included: false },
       {pattern: 'app/scripts/**/*.js', included: false },
       {pattern: 'test/spec/**/*.js', included: false },

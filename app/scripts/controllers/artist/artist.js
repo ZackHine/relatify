@@ -6,7 +6,7 @@
     var ngDependencies = [
       '$scope',
       'RelatedArtistsService',
-      'PossibleSongsService',
+      'PossibleSongsService'
     ];
 
     /**

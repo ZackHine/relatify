@@ -18,8 +18,8 @@ define(['angular', 'angular-mocks', 'app'], function(angular, mocks, app) {
       });
     }));
 
-    it('should attach a list of awesomeThings to the scope', function () {
-      expect(scope.awesomeThings.length).toBe(3);
+    it('should be defined', function () {
+      expect(SpotifyPlaylistCtrl).toBeDefined();
     });
   });
 });

@@ -1,11 +1,16 @@
 /*jshint unused: vars */
-define(['angular', 'angular-mocks', 'app'], function(angular, mocks, app) {
+define(['angular', 'angular-mocks', 'app', 'angular-cookies', 'angular-resource', 'angular-animate', 'angular-touch', 'angular-sanitize', 'angular-route', 'spotify',
+  'jquery',
+  'slick-carousel',
+  'angular-slick',
+  'angular-aria',
+  'angular-material'], function(angular, mocks, app, ngCookies, ngResource, ngAnimate, ngTouch, ngSanitize, ngRoute) {
   'use strict';
 
   describe('Controller: MainCtrl', function () {
 
     // load the controller's module
-    beforeEach(module('relatifyApp.controllers.MainCtrl'));
+    beforeEach(module('relatifyApp'));
 
     var MainCtrl,
       scope;
@@ -18,8 +23,8 @@ define(['angular', 'angular-mocks', 'app'], function(angular, mocks, app) {
       });
     }));
 
-    it('should attach a list of awesomeThings to the scope', function () {
-      expect(scope.awesomeThings.length).toBe(3);
+    it('should be defined', function () {
+      expect(MainCtrl).toBeDefined();
     });
   });
 });

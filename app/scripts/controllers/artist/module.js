@@ -8,18 +8,21 @@
     'angular',
     'relatify.app.artist/artist',
     'relatify.app.services/relatedartistsservice',
-    'relatify.app.services/possiblesongsservice'
+    'relatify.app.services/possiblesongsservice',
+    'relatify.app.services/spotifyuserservice'
   ], function (
     angular,
     ArtistController,
     RelatedArtistsService,
-    PossibleSongsService
+    PossibleSongsService,
+    SpotifyUserService
   ) {
 
     return angular.module('relatifyApp.controllers.ArtistCtrl', ['spotify', 'slick'])
       .controller('ArtistCtrl', ArtistController)
       .service('RelatedArtistsService', RelatedArtistsService)
-      .service('PossibleSongsService', PossibleSongsService);
+      .service('PossibleSongsService', PossibleSongsService)
+      .service('SpotifyUserService', SpotifyUserService);
   });
 })();
 

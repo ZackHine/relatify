@@ -1,5 +1,12 @@
 /*jshint unused: vars */
-define(['angular', 'angular-mocks', 'app'], function(angular, mocks, app) {
+define(['angular',
+  'angular-mocks',
+  'app',
+  'relatify.app.services/spotifyuserservice',
+  'relatify.app.services/possiblesongsservice',
+  'relatify.app.services/previewsongservice',
+  'relatify.app.services/relatedartistsservice',
+  'relatify.app.services/spotifyplaylistservice'], function(angular, mocks, app, SpotifyUserService, PossibleSongsService, PreviewSongService, RelatedArtistService, SpotifyPlaylistService) {
   'use strict';
 
   describe('Controller: PlaylistCtrl', function () {
@@ -18,8 +25,8 @@ define(['angular', 'angular-mocks', 'app'], function(angular, mocks, app) {
       });
     }));
 
-    it('should attach a list of awesomeThings to the scope', function () {
-      expect(scope.awesomeThings.length).toBe(3);
+    it('should be defined', function () {
+      expect(PlaylistCtrl).toBeDefined();
     });
   });
 });

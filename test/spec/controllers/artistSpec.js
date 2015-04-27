@@ -1,5 +1,12 @@
 /*jshint unused: vars */
-define(['angular', 'angular-mocks', 'app'], function(angular, mocks, app) {
+define(['angular',
+  'angular-mocks',
+  'app',
+  'spotify',
+  'jquery',
+  'slick-carousel',
+  'angular-slick',
+  'relatify.app.services/spotifyuserservice'], function(angular, mocks, app, Spotify, $, slickCarousel, angularSlick) {
   'use strict';
 
   describe('Controller: ArtistCtrl', function () {
@@ -18,8 +25,8 @@ define(['angular', 'angular-mocks', 'app'], function(angular, mocks, app) {
       });
     }));
 
-    it('should attach a list of awesomeThings to the scope', function () {
-      expect(scope.awesomeThings.length).toBe(3);
+    it('should be defined', function () {
+      expect(ArtistCtrl).toBeDefined();
     });
   });
 });

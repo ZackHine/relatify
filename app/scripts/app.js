@@ -39,7 +39,7 @@ define(['angular', 'relatify.app.main/main', 'relatify.app.artist/module', 'rela
       'ngMaterial'
   ])
     .config(function (SpotifyProvider) {
-      SpotifyProvider.setClientId('YOUR-CLIENT-ID');
+      SpotifyProvider.setClientId('3618510582f14091aeeca6ae88374c41');
       SpotifyProvider.setRedirectUri('http://localhost:9000/callback.html');
       SpotifyProvider.setScope('user-read-private playlist-read-private playlist-modify-private playlist-modify-public');
     })

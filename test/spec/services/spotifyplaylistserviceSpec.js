@@ -1,11 +1,13 @@
 /*jshint unused: vars */
-define(['angular', 'angular-mocks', 'app'], function(angular, mocks, app) {
+define(['angular',
+  'angular-mocks',
+  'app'], function(angular, mocks, app) {
   'use strict';
 
   describe('Service: SpotifyPlaylistService', function () {
 
     // load the service's module
-    beforeEach(module('relatifyApp.services.SpotifyPlaylistService'));
+    beforeEach(module('relatifyApp'));
 
     // instantiate service
     var SpotifyPlaylistService;
@@ -13,8 +15,8 @@ define(['angular', 'angular-mocks', 'app'], function(angular, mocks, app) {
       SpotifyPlaylistService = _SpotifyPlaylistService_;
     }));
 
-    it('should do something', function () {
-      expect(!!SpotifyPlaylistService).toBe(true);
+    it('should be defined', function () {
+      expect(SpotifyPlaylistService).toBeDefined();
     });
 
   });
