@@ -12,7 +12,19 @@ define(['angular',
     );
 
     var SongsCtrl,
-      scope;
+      scope, audioOriginal, audioMock;
+
+    beforeEach(function() {
+      audioOriginal = window.Audio;
+      audioMock = {};
+      audioMock.play = function(){};
+      audioMock.pause = function(){};
+      window.Audio = function() { return audioMock; };
+    });
+
+    afterEach(function() {
+      window.Audio = audioOriginal;
+    });
 
     // Initialize the controller and a mock scope
     beforeEach(inject(function ($controller, $rootScope) {

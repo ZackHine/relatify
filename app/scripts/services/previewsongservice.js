@@ -21,20 +21,7 @@
       var self = this;
 
       var currentSong = null;
-      var audio = null;
-      if(typeof Audio === 'function') {
-        audio = new Audio();
-      } else {
-        // mock it if it doesn't exist
-        audio = {
-          play: function() {
-
-          },
-          pause: function(){
-
-          }
-        };
-      }
+      var audio = new Audio();
 
       self.previewSong = function(song) {
         if(song !== currentSong && currentSong !== null) {
