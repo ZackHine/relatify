@@ -14,7 +14,7 @@
     SpotifyUserService
   ){
 
-    return angular.module('relatifyApp.controllers.DrawerCtrl', [])
+    return angular.module('relatifyApp.controllers.DrawerCtrl', ['spotify'])
       .controller('DrawerCtrl', DrawerController)
       .service('SpotifyUserService', SpotifyUserService);
   });
