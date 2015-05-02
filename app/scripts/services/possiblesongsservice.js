@@ -25,7 +25,7 @@
       var currentOrderSelected = 0;
 
       self.addArtist = function(artist) {
-        Spotify.getArtistTopTracks(artist.id, 'AU').then(function (data) {
+        Spotify.getArtistTopTracks(artist.id, 'US').then(function (data) {
           artistIdMap[artist.id] = true;
           for(var i = 0; i < data.tracks.length; ++i) {
             songs.push(data.tracks[i]);
@@ -52,7 +52,7 @@
         }
 
         angular.forEach(artists, function(artist){
-          promises.push(Spotify.getArtistTopTracks(artist.id, 'AU'));
+          promises.push(Spotify.getArtistTopTracks(artist.id, 'US'));
         });
 
         $q.all(promises).then(addArtist);
